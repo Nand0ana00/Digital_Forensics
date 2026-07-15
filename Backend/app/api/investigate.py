@@ -1,7 +1,5 @@
 from fastapi import APIRouter, HTTPException
-from app.agents.evidence_agent import EvidenceAgent
-from app.agents.planner_agent import PlannerAgent
-from app.agents.threat_agent import ThreatAnalysisAgent
+from app.agents.orchestrator_agent import OrchestratorAgent
 import os
 
 router = APIRouter()
@@ -23,24 +21,14 @@ async def investigate():
             key = os.path.getctime
         )
         
-        agent = EvidenceAgent(latest_file)
+        orchestrator = OrchestratorAgent(latest_file)
+        result = orchestrator.run()
         
-        summary = agent.generate_summary()
-        
-        planner = PlannerAgent(summary)
-        
-        plan = planner.generate_plan()
-        
-        ThreatAnalyser = ThreatAnalysisAgent(summary)
-        
-        threat_report = ThreatAnalyser.analyze()
         
         return{
             "status":"success",
-            "message":"Investigation completed successfully",
-            "evidence":summary,
-            "investigation_plan":plan,
-            "Threat_Analysis_report":threat_report
+            "message":"Investigation completed",
+            "result": result
         }
         
     except Exception as e:

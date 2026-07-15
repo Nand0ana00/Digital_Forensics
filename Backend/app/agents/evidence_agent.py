@@ -26,6 +26,12 @@ class EvidenceAgent:
         self.dataframe = pd.read_csv(self.filepath)
         return self.dataframe
     
+    def get_dataframe(self):
+        if self.dataframe is None:
+            self.load_csv()
+        
+        return self.dataframe
+    
     def validate_columns(self):
         missing_columns=[]
         

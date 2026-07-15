@@ -2,6 +2,7 @@ from fastapi import FastAPI
 from app.api.upload import router as upload_router
 from app.api.investigate import router as investigate_router
 
+
 app = FastAPI(
     title="AgentForensics API",
     version="1.0.0",

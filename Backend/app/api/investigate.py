@@ -1,5 +1,6 @@
 from fastapi import APIRouter, HTTPException
 from app.agents.evidence_agent import EvidenceAgent
+from app.agents.planner_agent import PlannerAgent
 import os
 
 router = APIRouter()
@@ -25,10 +26,15 @@ async def investigate():
         
         summary = agent.generate_summary()
         
+        planner = PlannerAgent(summary)
+        
+        plan = planner.generate_plan()
+        
         return{
             "status":"success",
             "message":"Investigation completed successfully",
-            "investigation":summary
+            "evidence":summary,
+            "investigation_plan":plan
         }
         
     except Exception as e:

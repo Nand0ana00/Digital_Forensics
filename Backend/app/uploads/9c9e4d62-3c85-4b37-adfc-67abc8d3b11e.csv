@@ -1,0 +1,11 @@
+timestamp,user,event,file_name,ip_address,device,status
+2026-07-14 09:00:12,John,Login,,192.168.1.10,Laptop,Success
+2026-07-14 09:03:45,John,Open File,salary.xlsx,192.168.1.10,Laptop,Success
+2026-07-14 09:05:18,John,USB Connected,,192.168.1.10,USB Kingston,Success
+2026-07-14 09:07:50,John,Copy File,salary.xlsx,192.168.1.10,USB Kingston,Success
+2026-07-14 09:10:33,John,Delete File,salary.xlsx,192.168.1.10,Laptop,Success
+2026-07-14 09:15:20,John,Logout,,192.168.1.10,Laptop,Success
+2026-07-14 10:01:05,Alice,Login,,192.168.1.20,Desktop,Success
+2026-07-14 10:03:12,Alice,Browser Visit,,192.168.1.20,Desktop,Success
+2026-07-14 10:06:44,Alice,Download File,report.pdf,192.168.1.20,Desktop,Success
+2026-07-14 10:12:30,Alice,Logout,,192.168.1.20,Desktop,Success

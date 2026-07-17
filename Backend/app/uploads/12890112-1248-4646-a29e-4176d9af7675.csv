@@ -1,0 +1,6 @@
+evidence_id,file_name,evidence_type,source,timestamp,description,severity
+E001,suspicious_log.txt,Log File,server_01,2026-07-15 10:30:00,Multiple failed login attempts detected,High
+E002,network_capture.pcap,Network Capture,firewall,2026-07-15 10:35:00,Unusual outbound network traffic,Medium
+E003,user_activity.csv,Activity Data,endpoint_02,2026-07-15 10:40:00,Suspicious user activity pattern,High
+E004,system_log.txt,Log File,server_02,2026-07-15 10:45:00,Unauthorized access attempt detected,Critical
+E005,email_dump.csv,Email Evidence,mail_server,2026-07-15 10:50:00,Possible phishing communication found,High

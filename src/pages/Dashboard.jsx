@@ -8,7 +8,43 @@ import RecentActivity from "../components/dashboard/RecentActivity";
 import TimelinePreview from "../components/dashboard/TimelinePreview";
 import AgentStatus from "../components/dashboard/AgentStatus";
 import ActivityChart from "../components/dashboard/ActivityChart";
+import { useState } from "react";
+import { investigate } from "../services/investigationService";
 export default function Dashboard() {
+  const [loading, setLoading] = useState(false);
+const [investigationData, setInvestigationData] = useState(null);
+
+
+async function handleInvestigation(){
+
+  try{
+
+    setLoading(true);
+
+    const data = await investigate();
+
+    console.log("Investigation Result:", data);
+
+    setInvestigationData(data);
+
+  }
+  catch(error){
+
+    console.error(error);
+
+    alert(
+      error.response?.data?.detail ||
+      "Investigation failed"
+    );
+
+  }
+  finally{
+
+    setLoading(false);
+
+  }
+
+}
   return (
     <div className="flex min-h-screen bg-slate-900">
 
@@ -23,7 +59,18 @@ export default function Dashboard() {
           <h1 className="text-3xl text-white font-bold mb-8">
             Investigation Dashboard
           </h1>
+          <button
+  onClick={handleInvestigation}
+  className="mb-8 bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white"
+>
 
+{
+ loading 
+ ? "Running Investigation..."
+ : "Start Investigation"
+}
+
+</button>
           {/* Statistics */}
           <Statistics />
 

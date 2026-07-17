@@ -7,44 +7,15 @@ import CasesLine from "../components/analytics/CasesLine";
 
 export default function Analytics(){
 
-return(
+  return(
+    <div className="p-8">
 
-<div className="flex min-h-screen bg-slate-900">
+      <h1 className="text-3xl font-bold text-white mb-8">
+        Analytics
+      </h1>
 
-<Sidebar/>
+      {/* Analytics content */}
 
-<div className="flex-1">
-
-<Navbar/>
-
-<div className="p-8">
-
-<h1 className="text-3xl text-white font-bold mb-8">
-
-Analytics Dashboard
-
-</h1>
-
-<div className="grid grid-cols-2 gap-6">
-
-<ThreatChart/>
-
-<EvidencePie/>
-
-</div>
-
-<div className="mt-8">
-
-<CasesLine/>
-
-</div>
-
-</div>
-
-</div>
-
-</div>
-
-);
-
+    </div>
+  );
 }

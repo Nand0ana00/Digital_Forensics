@@ -58,14 +58,34 @@ export default function Sidebar() {
     },
   ];
 
-  return (
-    <aside className="w-64 min-h-screen bg-gray-900 text-white p-6">
 
-      <h2 className="text-2xl font-bold mb-8">
+  return (
+
+    <aside
+      className="
+        w-64
+        min-h-screen
+        p-6
+        bg-white
+        dark:bg-gray-900
+        text-gray-900
+        dark:text-white
+        border-r
+        dark:border-gray-700
+      "
+    >
+
+      <h2 className="
+        text-2xl
+        font-bold
+        mb-8
+      ">
         MENU
       </h2>
 
+
       <ul className="space-y-3">
+
 
         {menu.map((item) => (
 
@@ -73,22 +93,40 @@ export default function Sidebar() {
 
             <Link
               to={item.path}
-              className={`flex items-center gap-3 p-3 rounded-lg transition ${
-                location.pathname === item.path
-                  ? "bg-blue-600"
-                  : "hover:bg-gray-700"
-              }`}
+
+              className={`
+                flex
+                items-center
+                gap-3
+                p-3
+                rounded-lg
+                transition
+
+                ${
+                  location.pathname === item.path
+                  ? "bg-blue-600 text-white"
+                  : "hover:bg-gray-200 dark:hover:bg-gray-700"
+                }
+              `}
             >
+
               {item.icon}
-              <span>{item.name}</span>
+
+              <span>
+                {item.name}
+              </span>
+
             </Link>
 
           </li>
 
         ))}
 
+
       </ul>
 
+
     </aside>
+
   );
 }

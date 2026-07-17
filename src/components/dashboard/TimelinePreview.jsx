@@ -1,54 +1,12 @@
 import {
-  FaSignInAlt,
-  FaUsb,
   FaFileAlt,
-  FaTrash,
-  FaCloudUploadAlt,
+  FaNetworkWired,
+  FaServer,
 } from "react-icons/fa";
 
 import Card from "../ui/Card";
 
-
-const timeline = [
-  {
-    time: "09:01",
-    title: "User Login",
-    description: "John logged into workstation.",
-    icon: <FaSignInAlt />,
-    color: "bg-blue-500",
-  },
-  {
-    time: "09:03",
-    title: "USB Connected",
-    description: "Kingston USB inserted.",
-    icon: <FaUsb />,
-    color: "bg-yellow-500",
-  },
-  {
-    time: "09:04",
-    title: "File Access",
-    description: "salary.xlsx opened.",
-    icon: <FaFileAlt />,
-    color: "bg-green-500",
-  },
-  {
-    time: "09:05",
-    title: "File Deleted",
-    description: "salary.xlsx removed.",
-    icon: <FaTrash />,
-    color: "bg-red-500",
-  },
-  {
-    time: "09:07",
-    title: "Cloud Upload",
-    description: "Dropbox synchronization detected.",
-    icon: <FaCloudUploadAlt />,
-    color: "bg-purple-500",
-  },
-];
-
-
-export default function TimelinePreview() {
+export default function TimelinePreview({ timeline }) {
 
   return (
 
@@ -56,10 +14,10 @@ export default function TimelinePreview() {
 
       <div className="relative border-l-2 border-slate-600 ml-5">
 
-        {timeline.map((event) => (
+        {(timeline ?? []).map((event, index) => (
 
           <div
-            key={event.time}
+            key={index}
             className="
               relative
               ml-8
@@ -72,7 +30,7 @@ export default function TimelinePreview() {
           >
 
             <div
-              className={`
+              className="
                 absolute
                 -left-12
                 flex
@@ -82,27 +40,27 @@ export default function TimelinePreview() {
                 h-8
                 rounded-full
                 text-white
-                ${event.color}
-              `}
+                bg-blue-500
+              "
             >
-              {event.icon}
+              <FaServer />
             </div>
 
-
             <p className="text-gray-400 text-sm">
-              {event.time}
+              {event.timestamp}
             </p>
-
 
             <h3 className="text-white font-semibold">
-              {event.title}
+              {event.event}
             </h3>
 
-
             <p className="text-gray-300">
-              {event.description}
+              <strong>Source:</strong> {event.source}
             </p>
 
+            <p className="text-gray-300">
+              <strong>File:</strong> {event.file}
+            </p>
 
           </div>
 

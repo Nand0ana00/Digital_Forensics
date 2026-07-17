@@ -8,93 +8,93 @@ import GraphPage from "../pages/GraphPage";
 import Report from "../pages/Report";
 import History from "../pages/History";
 import Settings from "../pages/Settings";
-import NotFound from "../pages/NotFound";
 import Analytics from "../pages/Analytics";
+import NotFound from "../pages/NotFound";
 
 import ProtectedRoute from "../components/layout/ProtectedRoute";
+import MainLayout from "../components/layout/MainLayout";
+
 
 export default function AppRoutes() {
+
   return (
+
     <Routes>
+
       {/* Public Routes */}
-      <Route path="/" element={<Login />} />
-      <Route path="/login" element={<Login />} />
+
+      <Route 
+        path="/" 
+        element={<Login />} 
+      />
+
+      <Route 
+        path="/login" 
+        element={<Login />} 
+      />
+
 
       {/* Protected Routes */}
-      <Route
-        path="/dashboard"
-        element={
-          <ProtectedRoute>
-            <Dashboard />
-          </ProtectedRoute>
-        }
-      />
 
       <Route
-        path="/upload"
         element={
           <ProtectedRoute>
-            <Upload />
+            <MainLayout />
           </ProtectedRoute>
         }
-      />
+      >
 
-      <Route
-        path="/timeline"
-        element={
-          <ProtectedRoute>
-            <TimelinePage />
-          </ProtectedRoute>
-        }
-      />
+        <Route 
+          path="/dashboard" 
+          element={<Dashboard />} 
+        />
 
-      <Route
-        path="/graph"
-        element={
-          <ProtectedRoute>
-            <GraphPage />
-          </ProtectedRoute>
-        }
-      />
+        <Route 
+          path="/upload" 
+          element={<Upload />} 
+        />
 
-      <Route
-        path="/report"
-        element={
-          <ProtectedRoute>
-            <Report />
-          </ProtectedRoute>
-        }
-      />
+        <Route 
+          path="/timeline" 
+          element={<TimelinePage />} 
+        />
 
-      <Route
-        path="/history"
-        element={
-          <ProtectedRoute>
-            <History />
-          </ProtectedRoute>
-        }
-      />
+        <Route 
+          path="/graph" 
+          element={<GraphPage />} 
+        />
 
-      <Route
-        path="/settings"
-        element={
-          <ProtectedRoute>
-            <Settings />
-          </ProtectedRoute>
-        }
-      />
+        <Route 
+          path="/report" 
+          element={<Report />} 
+        />
 
-      <Route
-        path="/analytics"
-        element={
-          <ProtectedRoute>
-            <Analytics />
-          </ProtectedRoute>
-        }
-      />
+        <Route 
+          path="/history" 
+          element={<History />} 
+        />
+
+        <Route 
+          path="/settings" 
+          element={<Settings />} 
+        />
+
+        <Route 
+          path="/analytics" 
+          element={<Analytics />} 
+        />
+
+      </Route>
+
 
       {/* 404 */}
-      <Route path="*" element={<NotFound />} />
+
+      <Route 
+        path="*" 
+        element={<NotFound />} 
+      />
+
     </Routes>
+
   );
 }

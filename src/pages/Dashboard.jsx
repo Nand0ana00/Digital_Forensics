@@ -1,5 +1,4 @@
-import Sidebar from "../components/layout/Sidebar";
-import Navbar from "../components/layout/Navbar";
+
 
 import Statistics from "../components/dashboard/Statistics";
 import ThreatPanel from "../components/dashboard/ThreatPanel";
@@ -25,7 +24,7 @@ async function handleInvestigation(){
 
     console.log("Investigation Result:", data);
 
-    setInvestigationData(data);
+    setInvestigationData(data.result);
 
   }
   catch(error){
@@ -45,64 +44,67 @@ async function handleInvestigation(){
   }
 
 }
-  return (
-    <div className="flex min-h-screen bg-slate-900">
+return (
+  <div className="p-8">
 
-      <Sidebar />
+    <h1 className="text-3xl text-white font-bold mb-8">
+      Investigation Dashboard
+    </h1>
 
-      <div className="flex-1">
+    <button
+      onClick={handleInvestigation}
+      className="mb-8 bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white"
+    >
+      {
+        loading 
+        ? "Running Investigation..."
+        : "Start Investigation"
+      }
+    </button>
 
-        <Navbar />
 
-        <div className="p-8">
+    {/* Statistics */}
+    <Statistics evidence={investigationData?.evidence} />
 
-          <h1 className="text-3xl text-white font-bold mb-8">
-            Investigation Dashboard
-          </h1>
-          <button
-  onClick={handleInvestigation}
-  className="mb-8 bg-green-600 hover:bg-green-700 px-6 py-3 rounded-lg text-white"
->
 
-{
- loading 
- ? "Running Investigation..."
- : "Start Investigation"
-}
+    {/* Second Row */}
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
 
-</button>
-          {/* Statistics */}
-          <Statistics />
+      <ThreatPanel 
+        threatReport={investigationData?.threat_report} 
+      />
 
-          {/* Second Row */}
-          <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mt-8">
-
-            <ThreatPanel />
-
-            <AgentProgress />
-
-          </div>
-          <div className="mt-8">
-            <AgentStatus />
-          </div>
-          <div className="mt-8">
-            <ActivityChart />
-          </div>
-
-          {/* Third Row */}
-          <div className="mt-8">
-            <RecentActivity />
-          </div>
-
-          {/* Fourth Row */}
-          <div className="mt-8">
-            <TimelinePreview />
-          </div>
-
-        </div>
-
-      </div>
+      <AgentProgress
+        loading={loading}
+        completed={!!investigationData}
+      />
 
     </div>
-  );
+
+
+    <div className="mt-8">
+      <AgentStatus 
+        plan={investigationData?.investigation_plan}
+        loading={loading}
+      />
+    </div>
+
+
+    <div className="mt-8">
+      <ActivityChart timeline={investigationData?.timeline} />
+    </div>
+
+
+    <div className="mt-8">
+      <RecentActivity timeline={investigationData?.timeline} />
+    </div>
+
+
+    <div className="mt-8">
+      <TimelinePreview timeline={investigationData?.timeline} />
+    </div>
+
+
+  </div>
+);
 }

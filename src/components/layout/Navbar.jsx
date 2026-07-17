@@ -13,17 +13,51 @@ export default function Navbar() {
   }
 
   return (
-    <nav className="flex justify-between items-center bg-gray-800 px-8 py-4 text-white shadow-md">
-      <h1 className="text-2xl font-bold">
+
+    <nav
+      className="
+        flex
+        justify-between
+        items-center
+        px-8
+        py-4
+        shadow-md
+
+        bg-white
+        dark:bg-gray-800
+
+        text-gray-900
+        dark:text-white
+
+        border-b
+        dark:border-gray-700
+      "
+    >
+
+      <h1 className="
+        text-2xl
+        font-bold
+      ">
         Digital Forensics AI
       </h1>
 
+
       <button
         onClick={handleLogout}
-        className="bg-red-600 px-4 py-2 rounded hover:bg-red-700"
+        className="
+          bg-red-600
+          px-4
+          py-2
+          rounded
+          text-white
+          hover:bg-red-700
+        "
       >
         Logout
       </button>
+
+
     </nav>
+
   );
 }

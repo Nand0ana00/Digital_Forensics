@@ -2,7 +2,7 @@ import { useState } from "react";
 import { FaUpload, FaFileAlt } from "react-icons/fa";
 import Button from "../ui/Button";
 import api from "../../integration/api";
-
+import { useNavigate } from "react-router-dom";
 export default function UploadBox() {
   const [file, setFile] = useState(null);
 
@@ -21,6 +21,7 @@ export default function UploadBox() {
     console.log("2. File selected:", file.name);
 
     try {
+      const navigate = useNavigate();
       const formData = new FormData();
       formData.append("file", file);
 
@@ -31,16 +32,23 @@ export default function UploadBox() {
       console.log("4. After api.post");
       console.log(response.data);
 
-      alert(response.data.message);
+     alert(response.data.message);
+     navigate("/dashboard");
     } catch (error) {
-      console.error("Upload Error:", error);
+  console.error("===== FULL ERROR =====");
+  console.error(error);
 
-      if (error.response) {
-        alert(error.response.data.detail);
-      } else {
-        alert("Network Error");
-      }
-    }
+  console.log("Message:", error.message);
+  console.log("Code:", error.code);
+  console.log("Response:", error.response);
+  console.log("Request:", error.request);
+
+  if (error.response) {
+    alert(error.response.data.detail);
+  } else {
+    alert(error.message);
+  }
+}
   }
 
   function handleRemove() {

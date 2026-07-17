@@ -5,27 +5,28 @@ import {
 
 import Card from "../ui/Card";
 
-export default function AgentStatus() {
+export default function AgentStatus({ plan, loading }) {
+
+  const completed = !loading && plan;
 
   const agents = [
     {
       name: "Planner Agent",
-      status: "Completed",
+      status: completed ? "Completed" : "Waiting",
     },
     {
       name: "Evidence Agent",
-      status: "Completed",
+      status: completed ? "Completed" : "Waiting",
     },
     {
-      name: "RAG Agent",
-      status: "Running",
+      name: "Threat Agent",
+      status: completed ? "Completed" : "Waiting",
     },
     {
-      name: "Report Agent",
-      status: "Waiting",
+      name: "Timeline Agent",
+      status: completed ? "Completed" : "Waiting",
     },
   ];
-
 
   const statusConfig = {
 
@@ -46,6 +47,9 @@ export default function AgentStatus() {
 
   };
 
+  if (loading) {
+    agents.forEach(agent => agent.status = "Running");
+  }
 
   return (
 
@@ -68,7 +72,6 @@ export default function AgentStatus() {
                 {agent.name}
               </span>
 
-
               <span className={`flex items-center gap-2 ${config.color}`}>
 
                 {config.icon}
@@ -78,7 +81,6 @@ export default function AgentStatus() {
                 </span>
 
               </span>
-
 
             </div>
 

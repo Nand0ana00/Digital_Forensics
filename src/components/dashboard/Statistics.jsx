@@ -1,48 +1,48 @@
 import SummaryCard from "./SummaryCard";
 
 import {
-  FaBug,
   FaFolderOpen,
-  FaDesktop,
-  FaUsers,
+  FaServer,
+  FaFileAlt,
+  FaExclamationTriangle,
 } from "react-icons/fa";
 
-export default function Statistics() {
+export default function Statistics({ evidence }) {
 
   return (
 
     <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-4 gap-6">
 
       <SummaryCard
-        title="Threats"
-        value="3"
-        change="+12%"
-        color="text-red-500"
-        icon={<FaBug />}
-      />
-
-      <SummaryCard
         title="Evidence"
-        value="18"
-        change="+5%"
+        value={evidence?.total_records ?? 0}
+        change=""
         color="text-blue-500"
         icon={<FaFolderOpen />}
       />
 
       <SummaryCard
-        title="Devices"
-        value="6"
-        change="+2%"
+        title="Sources"
+        value={evidence?.sources?.length ?? 0}
+        change=""
         color="text-green-500"
-        icon={<FaDesktop />}
+        icon={<FaServer />}
       />
 
       <SummaryCard
-        title="Users"
-        value="12"
-        change="+8%"
+        title="Evidence Types"
+        value={evidence?.evidence_types?.length ?? 0}
+        change=""
         color="text-purple-500"
-        icon={<FaUsers />}
+        icon={<FaFileAlt />}
+      />
+
+      <SummaryCard
+        title="Severity Levels"
+        value={evidence?.severity?.length ?? 0}
+        change=""
+        color="text-red-500"
+        icon={<FaExclamationTriangle />}
       />
 
     </div>

@@ -1,7 +1,12 @@
 import { FaExclamationTriangle } from "react-icons/fa";
 import Card from "../ui/Card";
 
-export default function ThreatPanel() {
+export default function ThreatPanel({ threatReport }) {
+
+  const riskLevel = threatReport?.risk_level ?? "UNKNOWN";
+  const riskScore = threatReport?.risk_score ?? 0;
+  const threats = threatReport?.threats ?? [];
+
   return (
     <Card>
 
@@ -16,35 +21,53 @@ export default function ThreatPanel() {
       <div className="space-y-4">
 
         <div className="flex justify-between">
-          <span className="text-gray-400">Threat Level</span>
-          <span className="text-red-500 font-bold">
-            HIGH
+          <span className="text-gray-400">Risk Level</span>
+
+          <span
+            className={`font-bold ${
+              riskLevel === "HIGH"
+                ? "text-red-500"
+                : riskLevel === "MEDIUM"
+                ? "text-yellow-400"
+                : "text-green-400"
+            }`}
+          >
+            {riskLevel}
           </span>
         </div>
 
         <div className="flex justify-between">
-          <span className="text-gray-400">Confidence</span>
-          <span className="text-green-400">
-            96%
+          <span className="text-gray-400">Risk Score</span>
+
+          <span className="text-white">
+            {riskScore}
           </span>
         </div>
 
         <div className="flex justify-between">
           <span className="text-gray-400">Status</span>
-          <span className="text-yellow-400">
-            Investigating
+
+          <span className="text-blue-400">
+            Investigation Complete
           </span>
         </div>
 
         <div>
           <p className="text-gray-400 mb-2">
-            Detection Reason
+            Threats
           </p>
 
-          <p className="text-white">
-            Multiple failed logins followed by unauthorized USB activity and
-            suspicious file deletion.
-          </p>
+          {threats.length > 0 ? (
+            <ul className="list-disc list-inside text-white">
+              {threats.map((threat, index) => (
+                <li key={index}>{threat}</li>
+              ))}
+            </ul>
+          ) : (
+            <p className="text-green-400">
+              No threats detected.
+            </p>
+          )}
         </div>
 
       </div>

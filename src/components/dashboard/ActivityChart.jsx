@@ -10,64 +10,51 @@ import {
 
 import Card from "../ui/Card";
 
+export default function ActivityChart({ timeline }) {
 
-const data = [
-  { day: "Mon", threats: 2 },
-  { day: "Tue", threats: 4 },
-  { day: "Wed", threats: 3 },
-  { day: "Thu", threats: 6 },
-  { day: "Fri", threats: 5 },
-  { day: "Sat", threats: 7 },
-  { day: "Sun", threats: 4 },
-];
-
-
-export default function ActivityChart() {
+  const chartData =
+    (timeline ?? []).map((item, index) => ({
+      time: item.timestamp.split(" ")[1],
+      events: index + 1,
+    }));
 
   return (
 
-    <Card title="Weekly Threat Activity">
+    <Card title="Investigation Timeline">
 
       <div className="h-80">
 
         <ResponsiveContainer width="100%" height="100%">
 
-          <LineChart data={data}>
+          <LineChart data={chartData}>
 
             <CartesianGrid
               strokeDasharray="3 3"
               stroke="#475569"
             />
 
-
             <XAxis
-              dataKey="day"
+              dataKey="time"
               stroke="#94a3b8"
             />
-
 
             <YAxis
               stroke="#94a3b8"
             />
 
-
             <Tooltip
               contentStyle={{
                 backgroundColor: "#1e293b",
                 border: "none",
-                color: "#ffffff",
               }}
             />
 
-
             <Line
               type="monotone"
-              dataKey="threats"
+              dataKey="events"
               stroke="#3b82f6"
               strokeWidth={3}
-              dot={{ r: 4 }}
             />
-
 
           </LineChart>
 

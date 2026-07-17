@@ -1,44 +1,11 @@
 import {
-  FaSignInAlt,
-  FaUsb,
   FaFileAlt,
-  FaTrash,
-  FaCloudUploadAlt,
+  FaServer,
 } from "react-icons/fa";
 
 import Card from "../ui/Card";
 
-
-const activities = [
-  {
-    time: "09:01",
-    icon: <FaSignInAlt className="text-blue-400" />,
-    text: "User login detected",
-  },
-  {
-    time: "09:03",
-    icon: <FaUsb className="text-yellow-400" />,
-    text: "USB device connected",
-  },
-  {
-    time: "09:04",
-    icon: <FaFileAlt className="text-green-400" />,
-    text: "salary.xlsx accessed",
-  },
-  {
-    time: "09:05",
-    icon: <FaTrash className="text-red-400" />,
-    text: "salary.xlsx deleted",
-  },
-  {
-    time: "09:07",
-    icon: <FaCloudUploadAlt className="text-purple-400" />,
-    text: "Dropbox upload detected",
-  },
-];
-
-
-export default function RecentActivity() {
+export default function RecentActivity({ timeline }) {
 
   return (
 
@@ -46,10 +13,10 @@ export default function RecentActivity() {
 
       <div className="space-y-3">
 
-        {activities.map((activity) => (
+        {(timeline ?? []).map((activity, index) => (
 
           <div
-            key={activity.time}
+            key={index}
             className="
               flex items-center justify-between
               border-b border-slate-700
@@ -63,23 +30,27 @@ export default function RecentActivity() {
 
             <div className="flex items-center gap-4">
 
-              <div className="text-xl">
-                {activity.icon}
+              <div className="text-xl text-blue-400">
+                <FaServer />
               </div>
 
+              <div>
 
-              <p className="text-white">
-                {activity.text}
-              </p>
+                <p className="text-white font-medium">
+                  {activity.event}
+                </p>
 
+                <p className="text-gray-400 text-sm">
+                  {activity.source} • {activity.file}
+                </p>
+
+              </div>
 
             </div>
 
-
             <span className="text-gray-400 text-sm">
-              {activity.time}
+              {activity.timestamp}
             </span>
-
 
           </div>
 
